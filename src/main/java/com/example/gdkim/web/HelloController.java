@@ -15,7 +15,8 @@ public class HelloController {
     }
 
     @GetMapping("/hello/dto") // @RequestParam 외부에서 API로 넘김 파리미터를 가져오는 어노테이션
-    public HelloResponseDto helloDto(@RequestParam("name") String name, @RequestParam("amount") int amount){
+    public HelloResponseDto helloDto(@RequestParam("name") String name,
+                                     @RequestParam("amount") int amount){
         return new HelloResponseDto(name,amount);
     }
 
