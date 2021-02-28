@@ -3,7 +3,7 @@ package com.example.gdkim.config.auth;
 import com.example.gdkim.config.auth.dto.OAuthAttributes;
 import com.example.gdkim.config.auth.dto.SessionUser;
 import com.example.gdkim.domain.user.User;
-import com.example.gdkim.domain.user.UserRespository;
+import com.example.gdkim.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -20,7 +20,7 @@ import java.util.Collections;
 @RequiredArgsConstructor
 @Service
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
-    private final UserRespository userRespository;
+    private final UserRepository userRepository;
     private final HttpSession httpSession;
 
     @Override
@@ -45,11 +45,10 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
 
     private User saveOrUpdate(OAuthAttributes attributes) {
-        User user = userRespository.findByEmail(attributes.getEmail())
+        User user = userRepository.findByEmail(attributes.getEmail())
                 .map(entity -> entity.update(attributes.getName(), attributes.getPicture()))
                 .orElse(attributes.toEntity());
 
-        return userRespository.save(user);
+        return userRepository.save(user);
     }
-
 }
