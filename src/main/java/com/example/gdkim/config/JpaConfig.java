@@ -1,4 +1,4 @@
-package com.example.gdkim.config.auth;
+package com.example.gdkim.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
